@@ -1,6 +1,7 @@
 <script setup>
 import { AsyncWrapper, AsyncManualWrapper, AsyncSetupWrapper } from "./AsyncWrapper";
 
+const loaderTestBasic = () => import("./components/TestBasic.vue");
 const loaderTestManualResolve = () => import("./components/TestManualResolve.vue");
 const loaderTestAsyncSetup = () => import("./components/TestAsyncSetup.vue");
 </script>
@@ -13,7 +14,23 @@ const loaderTestAsyncSetup = () => import("./components/TestAsyncSetup.vue");
 		<h3>Vue Async Wrapper</h3>
 	</header>
 	<main>
-		<!-- <div class="component-wrapper">
+		<div class="component-wrapper">
+			<h6>Test Basic Resolve</h6>
+			<AsyncWrapper :loader="loaderTestBasic">
+				<template #loading>
+					<div class="card-status">
+						<span>Loading component..</span>
+					</div>
+				</template>
+				<template #error>
+					<div class="card-status card-status-error">
+						<span>Failed to loading component.</span>
+					</div>
+				</template>
+			</AsyncWrapper>
+		</div>
+
+		<div class="component-wrapper">
 			<h6>Test Manual Resolve</h6>
 			<AsyncManualWrapper :loader="loaderTestManualResolve">
 				<template #loading>
@@ -43,7 +60,7 @@ const loaderTestAsyncSetup = () => import("./components/TestAsyncSetup.vue");
 					</div>
 				</template>
 			</AsyncManualWrapper>
-		</div> -->
+		</div>
 
 		<div class="component-wrapper">
 			<h6>Test Async Setup Resolve</h6>
